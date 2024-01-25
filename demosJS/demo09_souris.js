@@ -157,15 +157,19 @@ const keyUpHandler = (e) => {
 
 // 2) Et une fonction associées
 const mouseMoveHandler = (e) => {
+    // On calcul d'abord les positions relatives de la souris en faisant:
+    // la position horizontale de la souris dans la fenêtre du navigateur (e.clientX)
+    // MOINS la distance entre le bord gauche de la fenêtre et le bord gauche du canvas (canvas.offsetLeft)
     let relativeX = e.clientX - canvas.offsetLeft;
+    // la position verticale de la souris dans la fenêtre du navigateur (e.clientY)
+    // MOINS la distance entre le bord du haut de la fenêtre et le bord du haut du canvas (canvas.offsetTop)
     let relativeY = e.clientY - canvas.offsetTop;
 
-    if (
-        relativeX > 0 
-        && relativeX < canvas.width
-        && relativeY > 0
-        && relativeY < canvas.height) {
+    // On délimite la zone d'action de la souris pour la gestion de la raquette
+    if (relativeX > 0 && relativeX < canvas.width && relativeY > 0 && relativeY < canvas.height) {
+        // On modifie la position X de la raquette à chaque mouvement de la souris
         paddleX = relativeX - paddleWidth / 2;
+
         // Dans le CSS, faire disparaitre la souris du canvas
     }
 }
