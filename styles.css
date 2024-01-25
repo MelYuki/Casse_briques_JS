@@ -1,0 +1,25 @@
+/*
+canvas{
+    La définition du cadre se fait dans la balise HTML !!!
+    Sinon, cela impacte les éléments se trouvant dans le cadre...
+}
+*/
+.MyClass{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: 3px solid black;
+    border-radius: 20px;
+    background-color: aquamarine;
+}
+h1{
+    text-align: center;
+    width: 800px;
+    padding: 5px;
+}
+h1:hover{
+    color: aquamarine;
+    background-color: black;
+    text-transform: uppercase;
+    text-decoration: underline;
+}
