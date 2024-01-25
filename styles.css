@@ -4,6 +4,11 @@ canvas{
     Sinon, cela impacte les éléments se trouvant dans le cadre...
 }
 */
+canvas:hover{
+    /* Pour la disparition du pointeur dans le canvas,
+        une fois qu'on manipule la raquette avec la souris */
+    cursor: none;
+}
 .MyClass{
     margin-left: auto;
     margin-right: auto;
