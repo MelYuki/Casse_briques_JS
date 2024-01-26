@@ -11,6 +11,10 @@
 // https://www.w3schools.com/jsref/canvas_rect.asp
 // arc()
 // https://www.w3schools.com/tags/canvas_arc.asp
+// fill()
+// https://www.w3schools.com/jsref/canvas_fill.asp
+// stroke()
+// https://www.w3schools.com/jsref/canvas_stroke.asp
 // clearRect()
 // https://www.w3schools.com/jsref/canvas_clearrect.asp
 // fillText()

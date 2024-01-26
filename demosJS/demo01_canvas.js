@@ -44,7 +44,7 @@ const drawRect = () => {
     context.closePath();
 }
 // Appel de la fonction
-drawRect()
+drawRect();
 
 // Création de la fonction qui dessine un cercle
 const drawArc = () => {
@@ -61,4 +61,4 @@ const drawArc = () => {
     context.closePath();
 }
 // Appel de la fonction
-drawArc()
+drawArc();
