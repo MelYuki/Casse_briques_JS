@@ -24,6 +24,7 @@ let canvas = document.getElementById("myCanvas");
 // Déclaration du "context" dans lequel on utilisera l'élément, ce qui nous permettra de dessiner à l'intérieur.
 let context = canvas.getContext("2d");
 
+// Création de la fonction qui dessine un rectangle
 const drawRect = () => {
     // ouverture
     context.beginPath();
@@ -42,8 +43,10 @@ const drawRect = () => {
     // fermeture
     context.closePath();
 }
+// Appel de la fonction
 drawRect()
 
+// Création de la fonction qui dessine un cercle
 const drawArc = () => {
     context.beginPath();
     // définition d'un cercle:
@@ -57,4 +60,5 @@ const drawArc = () => {
     context.fill();
     context.closePath();
 }
+// Appel de la fonction
 drawArc()
