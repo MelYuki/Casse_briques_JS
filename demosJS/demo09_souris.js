@@ -5,6 +5,8 @@
 // https://developer.mozilla.org/fr/docs/Web/CSS/cursor
 
 // Méthodes de la balise HTML <canvas>
+// getContext()
+// https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
 // rect()
 // https://www.w3schools.com/jsref/canvas_rect.asp
 // arc()
@@ -15,12 +17,14 @@
 // https://www.w3schools.com/graphics/canvas_text.asp
 
 // JAVASCRIPT
+// La balise HTML <script>
+// https://www.w3schools.com/tags/tag_script.asp
 // Les variables
 // https://www.w3schools.com/js/js_variables.asp
 // https://github.com/MelYuki/JavaScript/blob/main/demoConstantesVariables.js
 // DOM
 // https://www.w3schools.com/js/js_htmldom.asp
-// fonction flechée (const name = ( params ) => { instructions })
+// fonction flechée "const name = ( params ) => { instructions }"
 // https://www.w3schools.com/js/js_arrow_function.asp
 // l'objet "Math"
 // https://www.w3schools.com/jsref/jsref_obj_math.asp

@@ -30,7 +30,7 @@ const drawRect = () => {
     // définition d'un rectangle:
         // les 2 premières valeurs spécifient les coordonnées du coin supérieur gauche
         // les 2 autres donnent la largeur et la hauteur
-    context.rect(20, 40, 150, 150);
+    context.rect(20, 40, 150, 75);
     // stockage d'une couleur que la méthode "fill()" utilisera
     context.fillStyle = "black";
     // peinte du rectangle
