@@ -28,24 +28,24 @@ let context = canvas.getContext("2d");
 
 // 1) De nouvelles variables pour modifier la position "bloquée" de la balle
 let x = canvas.width / 2;
-let y = canvas.height - 30;
+let y = canvas.height - 40;
 // 3) Pour faire croire que la balle bouge,
-// définition de 2 autres variables afin de modifier la position à chaque intervalles
+// définition de 2 autres variables afin de modifier la position à chaque intervalle
 let dx = 2;
 let dy = -2;
 
 const draw = () => {
-    // 6) pour éffacer la trainée de la balle, il faut nettoyer le canvas à chaque intervalles
-        // Les 2 premières valeurs commencent à gauche, en haut (0, 0)
-        // Les 2 dernières valeurs terminent à droite, en bas (largeur du cadre, hauteur du cadre)
+    // 6) Pour effacer la trainée de la balle, il faut nettoyer le canvas à chaque intervalle
+        // les 2 premières valeurs commencent à gauche, en haut (0, 0)
+        // les 2 dernières valeurs terminent à droite, en bas (largeur, hauteur du cadre)
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
-    // 2) on utilise nos nouvelles variables (x, y)
+    // 2) On utilise nos nouvelles variables (x, y)
     context.arc(x, y, 10, 0, Math.PI * 2);
     context.fillStyle = "red";
     context.fill();
     context.closePath();
-    // 4) on modifie la position une fois le dessin effectué
+    // 4) On modifie la position une fois le dessin effectué
     x += dx
     y += dy
 }

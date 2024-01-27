@@ -34,7 +34,7 @@ let x = canvas.width / 2;
 let y = canvas.height - 30;
 let dx = 2;
 let dy = -2;
-// 1) Une nouvelles variable pour la détection de collisions
+// 1) Une nouvelle variable pour la détection de collisions
 let ballRadius = 10;
 
 const drawBall = () => {
