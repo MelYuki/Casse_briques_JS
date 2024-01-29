@@ -38,6 +38,8 @@
 // https://www.w3schools.com/js/js_if_else.asp
 // les opérateurs
 // https://github.com/MelYuki/JavaScript/blob/main/demoOperateurs.js
+// Boolean
+// https://www.w3schools.com/js/js_booleans.asp
 // Events
 // https://www.w3schools.com/jsref/dom_obj_event.asp
 // Listener "addEventListener()"

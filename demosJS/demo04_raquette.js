@@ -53,15 +53,15 @@ let leftPressed = false;
 let rightPressed = false;
 
 // 6) Création de la fonction qui gère l'appui sur les touches et modifie les variables d'état
-const keyDownHandler = (e) => {
-    if (e.key == "Right" || e.key == "ArrowRight") rightPressed = true;
-    else if (e.key == "Left" || e.key == "ArrowLeft") leftPressed = true;
+const keyDownHandler = (event) => {
+    if (event.key == "Right" || event.key == "ArrowRight") rightPressed = true;
+    else if (event.key == "Left" || event.key == "ArrowLeft") leftPressed = true;
 }
 
-// 7) Création de la fonction qui gère le relacherment des touches et modifie les variables d'état
-const keyUpHandler = (e) => {
-    if (e.key == "Right" || e.key == "ArrowRight") rightPressed = false;
-    else if (e.key == "Left" || e.key == "ArrowLeft") leftPressed = false;
+// 7) Création de la fonction qui gère le relâchement des touches et modifie les variables d'état
+const keyUpHandler = (event) => {
+    if (event.key == "Right" || event.key == "ArrowRight") rightPressed = false;
+    else if (event.key == "Left" || event.key == "ArrowLeft") leftPressed = false;
 }
 
 // 5) Mise en place de 2 "Listener" pour être informé des appuis sur les touches
@@ -72,14 +72,14 @@ document.addEventListener("keyup", keyUpHandler, false);
 const movePaddle = () => {
     if (rightPressed) {
         paddleX += paddleStep;
-        // console.log("paddleX right:", paddleX)
+        // Pour éviter que la raquette ne sorte du cadre
         if (paddleX + paddleWidth > canvas.width) {
             paddleX = canvas.width - paddleWidth;
         }
     }
     else if (leftPressed) {
         paddleX -= paddleStep;
-        // console.log("paddleX left:", paddleX)
+        // Pour éviter que la raquette ne sorte du cadre
         if (paddleX < 0) {
             paddleX = 0;
         }
