@@ -39,7 +39,7 @@ let ballRadius = 10;
 
 const drawBall = () => {
     context.beginPath();
-    // 2) on utilise notre nouvelle variable
+    // 2) On utilise notre nouvelle variable
     context.arc(x, y, ballRadius, 0, Math.PI * 2);
     context.fillStyle = "red";
     context.fill();
@@ -52,12 +52,12 @@ const draw = () => {
 
     // 3) Conditions et Comparaisons des valeurs d'espace pour délimiter la zone de collisions
     // gestion des limites,
-    // de haut (0 + le rayon de la balle) || en bas (la hauteur - le rayon)
+    // de haut (0 + le rayon de la balle) ||(ou) en bas (la hauteur - le rayon)
     if (y + dy < ballRadius || y + dy > canvas.height - ballRadius) {
         // 4) Faire changer la balle de direction en rendant la variable égale à son inverse
         dy = -dy;
     }
-    // de gauche (0 + le rayon de la balle) || à droite (la largeur - le rayon)
+    // de gauche (0 + le rayon de la balle) ||(ou) à droite (la largeur - le rayon)
     if (x + dx < ballRadius || x + dx > canvas.width - ballRadius) {
         // 4) Idem
         dx = -dx;
