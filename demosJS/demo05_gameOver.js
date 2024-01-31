@@ -45,11 +45,13 @@
 // CODE FACTORISÉ par rapport à la demo 04 !
 let canvas = document.getElementById("myCanvas");
 let context = canvas.getContext("2d");
+
 let x = canvas.width / 2;
 let y = canvas.height - 50;
 let dx = 2;
 let dy = -2;
 let ballRadius = 10;
+
 let paddleWidth = 60;
 let paddleHeight = 10;
 let paddleX = (canvas.width - paddleWidth) / 2;
@@ -62,12 +64,10 @@ const keyDownHandler = (e) => {
     if (e.key == "Right" || e.key == "ArrowRight") rightPressed = true;
     else if (e.key == "Left" || e.key == "ArrowLeft") leftPressed = true;
 }
-
 const keyUpHandler = (e) => {
     if (e.key == "Right" || e.key == "ArrowRight") rightPressed = false;
     else if (e.key == "Left" || e.key == "ArrowLeft") leftPressed = false;
 }
-
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
@@ -104,11 +104,11 @@ const bounce = () => {
     else if (y + dy > canvas.height - ballRadius) {
         // 3) On affiche notre message comme "alert()" pour l'instant
         alert("GAME OVER");
-        // 4) On refresh la page
+        // 4) On refresh la page (pour FIREFOX, c'est ok !)
         // "location" cible l'URL du document
         // "reload()" rehcarge la page de l'URL ciblé
         document.location.reload();
-        // 6) On peut maintenant marquer un arrêt
+        // 6) On peut maintenant marquer un arrêt (pour GOOGLE CHROME !)
         // /!\ Si on le fait pas, on créé une boucle infinie /!\
         clearInterval(interval);
     }
@@ -130,10 +130,10 @@ const draw = () => {
     bounce();
     drawPaddle();
     movePaddle();
-
     x += dx
     y += dy
 }
 
-// 5) Nous allons mettre ceci dans une variable pour pouvoir "nettoyer" l'intervalle
+// 5) Nous allons mettre ceci dans une variable
+// pour pouvoir l'utiliser plus haut et "nettoyer" l'intervalle
 let interval = setInterval(draw, 10);
