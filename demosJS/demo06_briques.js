@@ -40,11 +40,13 @@
 // clearInterval()
 // https://www.w3schools.com/jsref/met_win_clearinterval.asp
 // Tableaux
-// https://www.w3schools.com/jsref/jsref_obj_array.asp
+// https://www.w3schools.com/js/js_arrays.asp
 // Tableau à 2 dimensions
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array#cr%C3%A9er_un_tableau_%C3%A0_deux_dimensions
 // Boucle "for"
 // https://www.w3schools.com/js/js_loop_for.asp
+// Type Objet
+// https://www.w3schools.com/js/js_objects.asp
 // __________________________________________________________________________
 // #endregion
 
@@ -72,13 +74,18 @@ let brickPadding = 10;
 let brickMarginTop = 45;
 let brickMarginLeft = 45;
 
-// 2) Création d'un tableau qui contiendra les colonnes et les lignes de briques
+// 2) Déclaration d'un tableau qui contiendra les colonnes et les lignes de briques
 let bricksTab = [];
 // 3) Utilisation d'une boucle "for" pour créer le tableau à 2 dimensions
 for (let c = 0; c < brickColumnCount; c++) {
+    // Création d'une colonne
     bricksTab[c] = [];
     for (let r = 0; r < brickRowCount; r++) {
-        bricksTab[c][r] = {x: 0, y: 0};
+        // Création d'une ligne qui a pour objet une brique avec valeurs "x", "y"
+        bricksTab[c][r] = {
+            x: 0,
+            y: 0
+        };
     }
 }
 

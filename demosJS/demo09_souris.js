@@ -38,7 +38,7 @@
 // https://www.w3schools.com/js/js_if_else.asp
 // les opérateurs
 // https://github.com/MelYuki/JavaScript/blob/main/demoOperateurs.js
-// Boolean
+// Type Boolean
 // https://www.w3schools.com/js/js_booleans.asp
 // Events
 // https://www.w3schools.com/jsref/dom_obj_event.asp
@@ -56,11 +56,13 @@
 // clearInterval()
 // https://www.w3schools.com/jsref/met_win_clearinterval.asp
 // Tableaux
-// https://www.w3schools.com/jsref/jsref_obj_array.asp
+// https://www.w3schools.com/js/js_arrays.asp
 // Tableau à 2 dimensions
 // https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Array#cr%C3%A9er_un_tableau_%C3%A0_deux_dimensions
 // Boucle "for"
 // https://www.w3schools.com/js/js_loop_for.asp
+// Type Objet
+// https://www.w3schools.com/js/js_objects.asp
 // MouseEvent
 // https://developer.mozilla.org/fr/docs/Web/API/MouseEvent
 // mousemove
