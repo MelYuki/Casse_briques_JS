@@ -141,7 +141,7 @@ const win = () => {
     }
 }
 
-const collisionDectection = () => {
+const collisionDetection = () => {
     for (let c = 0; c < brickColumnCount; c++) {
         for (let r = 0; r < brickRowCount; r++) {
             let b = bricksTab[c][r];
@@ -236,7 +236,7 @@ const draw = () => {
     drawPaddle();
     movePaddle();
     drawBricks();
-    collisionDectection();
+    collisionDetection();
     drawScore();
     x += dx
     y += dy

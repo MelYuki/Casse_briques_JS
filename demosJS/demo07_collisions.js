@@ -103,7 +103,7 @@ const drawBricks = () => {
 }
 
 // 1) Création d'une fonction qui va parcourir toutes les briques et comparer la position de chaque brique avec les coordonnées de la balle
-const collisionDectection = () => {
+const collisionDetection = () => {
     for (let c = 0; c < brickColumnCount; c++) {
         for (let r = 0; r < brickRowCount; r++) {
             // 2) On range l'élément de chaque itération dans une varibale
@@ -125,12 +125,10 @@ const keyDownHandler = (e) => {
     if (e.key == "Right" || e.key == "ArrowRight") rightPressed = true;
     else if (e.key == "Left" || e.key == "ArrowLeft") leftPressed = true;
 }
-
 const keyUpHandler = (e) => {
     if (e.key == "Right" || e.key == "ArrowRight") rightPressed = false;
     else if (e.key == "Left" || e.key == "ArrowLeft") leftPressed = false;
 }
-
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 
@@ -138,7 +136,6 @@ const movePaddle = () => {
     if (rightPressed && paddleX < canvas.width - paddleWidth) paddleX += paddleStep;
     else if (leftPressed && paddleX > 0) paddleX -= paddleStep;
 }
-
 const drawPaddle = () => {
     context.beginPath();
     context.rect(paddleX, paddleY, paddleWidth, paddleHeight);
@@ -155,7 +152,6 @@ const gameoverOrNot = () => {
         clearInterval(interval);
     }
 }
-
 const bounce = () => {
     if (y + dy < ballRadius) dy = -dy;
     gameoverOrNot()
@@ -177,10 +173,9 @@ const draw = () => {
     drawPaddle();
     movePaddle();
     drawBricks();
-    // 9) Utilisation de la fonction de collision et d'éffacement des briques
-    collisionDectection();
+    // 4) Utilisation de la fonction de collision et d'effacement des briques
+    collisionDetection();
     x += dx
     y += dy
 }
-
 let interval = setInterval(draw, 10);
