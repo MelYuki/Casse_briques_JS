@@ -81,14 +81,15 @@ for (let c = 0; c < brickColumnCount; c++) {
         bricksTab[c][r] = {x: 0, y: 0, status: 1};
     }
 }
-// 1) Création d'une variable pour le comptes des scores
+// 1) Création d'une variable pour le compte des scores
 let score = 0;
 
 // 2) Préparation du score à afficher
 const drawScore = () => {
     context.font = "16px Arial";
     context.fillStyle = "black";
-    // TIPS: backticks au lieu des doublequotes, qui permet l'inclusion d'une variable dans le string grâce à ${}
+    // TIPS: backticks au lieu des doublequotes,
+    // qui permet l'inclusion d'une variable dans le string grâce à ${}
     context.fillText(`Score : ${score}`, 10, 20);
 }
 
@@ -130,8 +131,6 @@ const collisionDetection = () => {
                     b.status = 0;
                     // 3) Ajout d'un point pour chaque brique cassée
                     score++;
-                    // 6) Utilisation de la fonction de vérifiaction de gain ou non
-                    win();
                 }
             }
         }
@@ -197,6 +196,8 @@ const draw = () => {
     collisionDetection();
     // 4) Dessin du score
     drawScore();
+    // 6) Utilisation de la fonction de vérifiaction de gain ou non
+    win();
     x += dx
     y += dy
 }

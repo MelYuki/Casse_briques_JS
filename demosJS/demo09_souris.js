@@ -150,7 +150,6 @@ const collisionDetection = () => {
                     dy = -dy;
                     b.status = 0;
                     score++;
-                    win();
                 }
             }
         }
@@ -238,8 +237,8 @@ const draw = () => {
     drawBricks();
     collisionDetection();
     drawScore();
+    win();
     x += dx
     y += dy
 }
-
 let interval = setInterval(draw, 10);
