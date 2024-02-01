@@ -54,7 +54,6 @@ const collisionDetection = () => {
             if (b.status == 1 && x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
                 dy = -dy;
                 b.status = 0;
-                // 3) Ajout d'un point pour chaque brique cassée
                 score++;
             }
         }
