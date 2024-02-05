@@ -21,6 +21,7 @@ h1{
     text-align: center;
     width: 800px;
     padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 h1:hover{
     color: aquamarine;
