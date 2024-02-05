@@ -5,8 +5,10 @@ let ball = {
     radius : 7.5,
     x : canvas.width / 2,
     y : canvas.height - 40,
-    dx : 2,
-    dy : -2,
+    dx1 : 1,
+    dy1 : -1,
+    dx2 : 2,
+    dy2 : -2,
     color :"red"
 }
 let paddle = {
@@ -40,15 +42,15 @@ let color = {
 }
 let score = 0;
 
-const random = () => {
-    let num = 256 - Math.round(Math.random()*256);
+const random = (limit) => {
+    let num = limit - Math.round(Math.random()*limit);
     return num
 }
 const setColor = (r = -1, g = -1, b = -1) => {
     if(r == -1 || g == -1 || b == -1) {
-        color.r = random();
-        color.g = random();
-        color.b = random();
+        color.r = random(255);
+        color.g = random(255);
+        color.b = random(255);
     }
     else {
         color.r = r;
@@ -56,14 +58,6 @@ const setColor = (r = -1, g = -1, b = -1) => {
         color.b = b;
     }
     return `rgba(${color.r}, ${color.g}, ${color.b})`
-}
-
-const drawPaddle = () => {
-    context.beginPath();
-    context.rect(paddle.x, paddle.y, paddle.width, paddle.height);
-    context.fillStyle = setColor(0,0,0);
-    context.fill();
-    context.closePath();
 }
 
 const keyDownHandler = (event) => {
@@ -85,12 +79,20 @@ const movePaddle = () => {
         paddle.x -= paddle.step;
     }
 }
+const drawPaddle = () => {
+    context.beginPath();
+    context.rect(paddle.x, paddle.y, paddle.width, paddle.height);
+    context.fillStyle = setColor(0,0,0);
+    context.fill();
+    context.closePath();
+}
+
 const gameoverOrNot = () => {
     if (ball.x > paddle.x && 
         ball.x < paddle.x+paddle.width && 
         ball.y == paddle.y
         ) {
-        ball.dy = -ball.dy;
+        ball.dy2 = -ball.dy2;
         ball.color = setColor(255, 0, 0);
     }
     else if (ball.y > canvas.height-ball.radius) {
@@ -99,17 +101,31 @@ const gameoverOrNot = () => {
         clearInterval(interval);
     }
 }
+const moveBall = (direction) => {
+    switch(direction) {
+        case 0 :
+            break
+        case 1 :
+            break
+        case 2 :
+            break
+        default :
+            ball.x += ball.dx2;
+            ball.y += ball.dy2;
+            break
+    }
+}
 const bounce = () => {
     if(ball.y < ball.radius) {
-        ball.dy = -ball.dy;
+        ball.dy2 = -ball.dy2;
         ball.color = setColor();
     }
     else if(ball.x < ball.radius) {
-        ball.dx = -ball.dx;
+        ball.dx2 = -ball.dx2;
         ball.color = setColor();
     }
     else if(ball.x > canvas.width-ball.radius) {
-        ball.dx = -ball.dx;
+        ball.dx2 = -ball.dx2;
         ball.color = setColor();
     }
     gameoverOrNot();
@@ -126,10 +142,9 @@ const drawBall = () => {
 const draw = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
+    moveBall();
     bounce();
     drawPaddle();
     movePaddle();
-    ball.x += ball.dx
-    ball.y += ball.dy
 }
 let interval = setInterval(draw, 10);
