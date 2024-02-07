@@ -20,24 +20,26 @@ let paddle = {
     color : "black"
 }
 let wall = {
+    tab : [],
     column : 7,
     row : 5,
     marginTop : 45,
-    marginLeft : 90,
-    brick : {
-        width : 70,
-        height : 15,
-        margin : 15,
-        x : 0,
-        y : 0,
-        status : 1,
-        color : "black"
-    }
+    marginLeft : 110
 }
-let color = {
-    r : 0,
-    g : 0,
-    b : 0
+let brick = {
+    width : 70,
+    height : 15,
+    margin : 15
+}
+for (let c = 0; c < wall.column; c++) {
+    wall.tab[c] = [];
+    for (let r = 0; r < wall.row; r++) {
+        wall.tab[c][r] = {
+            x : 0,
+            y : 0,
+            color : "black",
+            status : 1};
+    }
 }
 let score = 0;
 
@@ -47,6 +49,7 @@ const random = (limit) => {
     return num
 }
 const setColor = (r = -1, g = -1, b = -1) => {
+    let color = {r : 0, g : 0, b : 0};
     if(r == -1 || g == -1 || b == -1) {
         color.r = random(255);
         color.g = random(255);
@@ -58,6 +61,39 @@ const setColor = (r = -1, g = -1, b = -1) => {
         color.b = b;
     }
     return `rgba(${color.r}, ${color.g}, ${color.b})`
+}
+
+const brickCollision = (param) => {
+    if (param.status == 1
+        && ball.x > param.x
+        && ball.x < param.x + brick.width
+        && ball.y > param.y
+        && ball.y < param.y + brick.height
+        ) {
+        ball.dy = -ball.dy;
+        param.status = 0;
+    }
+}
+const drawBricks = (param) => {
+    context.beginPath();
+    context.rect(param.x, param.y, brick.width, brick.height);
+    context.fillStyle = param.color;
+    context.fill();
+    context.closePath();
+}
+const setWall = () => {
+    for (let c = 0; c < wall.column; c++) {
+        for (let r = 0; r < wall.row; r++) {
+            let b = wall.tab[c][r];
+            if (b.status == 1) {
+                b.x = c * (brick.width + brick.margin) + wall.marginLeft;
+                b.y = r * (brick.height + brick.margin) + wall.marginTop;
+                b.color = setColor(255-b.y, 0, b.y);
+                drawBricks(b);
+                brickCollision(b);
+            }
+        }
+    }
 }
 
 // #region LISTENER
@@ -98,7 +134,6 @@ const gameoverOrNot = () => {
         ball.dy = ball.dy %2 == 0 ? -random(3) : -random(4);
         // console.log("dy => paddle :", ball.dy);
         ball.color = setColor(255, 0, 0);
-        paddle.color = setColor();
     }
     // CANVAS
     else if(ball.y + ball.radius > canvas.height) {
@@ -143,7 +178,9 @@ const draw = () => {
     bounce();
     drawPaddle();
     movePaddle();
+    setWall();
     ball.x += ball.dx;
     ball.y += ball.dy;
 }
 let interval = setInterval(draw, 10);
+// draw();
