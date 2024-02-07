@@ -5,10 +5,8 @@ let ball = {
     radius : 7.5,
     x : canvas.width / 2,
     y : canvas.height - 40,
-    dx1 : 1,
-    dy1 : -1,
-    dx2 : 2,
-    dy2 : -2,
+    dx : 2,
+    dy : -2,
     color :"red"
 }
 let paddle = {
@@ -43,7 +41,7 @@ let color = {
 let score = 0;
 
 const random = (limit) => {
-    let num = limit - Math.round(Math.random()*limit);
+    let num = Math.round(Math.random()*limit);
     return num
 }
 const setColor = (r = -1, g = -1, b = -1) => {
@@ -60,6 +58,7 @@ const setColor = (r = -1, g = -1, b = -1) => {
     return `rgba(${color.r}, ${color.g}, ${color.b})`
 }
 
+// #region LISTENER
 const keyDownHandler = (event) => {
     if (event.key == "Right" || event.key == "ArrowRight") paddle.right = true;
     else if (event.key == "Left" || event.key == "ArrowLeft") paddle.left = true;
@@ -70,7 +69,7 @@ const keyUpHandler = (event) => {
 }
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
-
+// #endregion
 const movePaddle = () => {
     if (paddle.right && paddle.x < canvas.width - paddle.width) {
         paddle.x += paddle.step;
@@ -88,46 +87,35 @@ const drawPaddle = () => {
 }
 
 const gameoverOrNot = () => {
-    if (ball.x > paddle.x && 
-        ball.x < paddle.x+paddle.width && 
-        ball.y == paddle.y
-        ) {
-        ball.dy2 = -ball.dy2;
+    if(ball.y + ball.radius > paddle.y 
+        && ball.x > paddle.x - ball.radius
+        && ball.x < paddle.x + paddle.width + ball.radius) {
+        ball.dy = -random(3);
         ball.color = setColor(255, 0, 0);
     }
-    else if (ball.y > canvas.height-ball.radius) {
+    else if (ball.y + ball.radius > canvas.height) {
         alert("GAME OVER");
         document.location.reload();
         clearInterval(interval);
     }
 }
-const moveBall = (direction) => {
-    switch(direction) {
-        case 0 :
-            break
-        case 1 :
-            break
-        case 2 :
-            break
-        default :
-            ball.x += ball.dx2;
-            ball.y += ball.dy2;
-            break
-    }
-}
 const bounce = () => {
+    // UP
     if(ball.y < ball.radius) {
-        ball.dy2 = -ball.dy2;
+        ball.dy = random(3);
         ball.color = setColor();
     }
+    // LEFT
     else if(ball.x < ball.radius) {
-        ball.dx2 = -ball.dx2;
+        ball.dx = random(3);
         ball.color = setColor();
     }
-    else if(ball.x > canvas.width-ball.radius) {
-        ball.dx2 = -ball.dx2;
+    // RIGHT
+    else if(ball.x > canvas.width - ball.radius) {
+        ball.dx = -random(3);
         ball.color = setColor();
     }
+    // DOWN
     gameoverOrNot();
 }
 
@@ -142,9 +130,10 @@ const drawBall = () => {
 const draw = () => {
     context.clearRect(0, 0, canvas.width, canvas.height);
     drawBall();
-    moveBall();
     bounce();
     drawPaddle();
     movePaddle();
+    ball.x += ball.dx;
+    ball.y += ball.dy;
 }
 let interval = setInterval(draw, 10);
