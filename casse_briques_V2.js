@@ -2,7 +2,7 @@ let canvas = document.getElementById("myCanvas");
 let context = canvas.getContext("2d");
 
 let ball = {
-    radius : 7.5,
+    radius : 6,
     x : canvas.width / 2,
     y : canvas.height - 40,
     dx : 2,
@@ -26,19 +26,21 @@ let wall = {
     marginTop : 45,
     marginLeft : 110
 }
-let brick = {
-    width : 70,
-    height : 15,
-    margin : 15
-}
-for (let c = 0; c < wall.column; c++) {
+let brick = {};
+for(let c = 0; c < wall.column; c++) {
     wall.tab[c] = [];
-    for (let r = 0; r < wall.row; r++) {
-        wall.tab[c][r] = {
+    for(let r = 0; r < wall.row; r++) {
+        brick = {
+            id : (c * wall.row + r) + 1,
+            width : 70,
+            height : 15,
+            margin : 15,
             x : 0,
             y : 0,
             color : "black",
-            status : 1};
+            status : 1
+        };
+        wall.tab[c][r] = brick;
     }
 }
 let score = 0;
@@ -63,33 +65,80 @@ const setColor = (r = -1, g = -1, b = -1) => {
     return `rgba(${color.r}, ${color.g}, ${color.b})`
 }
 
-const brickCollision = (param) => {
-    if (param.status == 1
-        && ball.x > param.x
-        && ball.x < param.x + brick.width
-        && ball.y > param.y
-        && ball.y < param.y + brick.height
-        ) {
-        ball.dy = -ball.dy;
-        param.status = 0;
+const brickCollision = (params) => {
+    let brickDestroyed = false;
+    // from BELOW
+    if(ball.y - ball.radius < params.y + params.height) {
+        if(ball.x + ball.radius > params.x
+            && ball.x - ball.radius < params.x + params.width
+            && ball.y + ball.radius > params.y
+            ) {
+            ball.dy = -ball.dy;
+            brickDestroyed = true;
+            console.log("BELOW");
+        }
+    }
+    // from ABOVE
+    else if(ball.y + ball.radius > params.y) {
+        if(ball.x + ball.radius > params.x
+            && ball.x - ball.radius < params.x + params.width
+            && ball.y - ball.radius < params.y + params.height
+            ) {
+            ball.dy = -ball.dy;
+            brickDestroyed = true;
+            console.log("ABOVE");
+        }
+    }
+    // from LEFT SIDE
+    else if(ball.x + ball.radius > params.x) {
+        if(ball.y + ball.radius > params.y
+            && ball.x - ball.radius < params.x + params.width
+            && ball.y - ball.radius < params.y + params.height
+            ) {
+            ball.dx = -ball.dx;
+            brickDestroyed = true;
+            console.log("LEFT SIDE");
+        }
+    }
+    // from RIGHT SIDE
+    else if(ball.x - ball.radius < params.x + params.width) {
+        if(ball.y + ball.radius > params.y
+            && ball.x + ball.radius > params.x
+            && ball.y - ball.radius < params.y + params.height
+            ) {
+            ball.dx = -ball.dx;
+            brickDestroyed = true;
+            console.log("RIGHT SIDE");
+        }
+    }
+
+    if(brickDestroyed) {
+        brickDestroyed = false;
+        ball.color = setColor();
+        params.status = 0;
+        if(params.id < 10)
+        console.log(`! Brick number "0${params.id}" has been destroyed !`);
+        else
+        console.log(`! Brick number "${params.id}" has been destroyed !`);
     }
 }
-const drawBricks = (param) => {
+const drawBricks = (params) => {
     context.beginPath();
-    context.rect(param.x, param.y, brick.width, brick.height);
-    context.fillStyle = param.color;
+    context.rect(params.x, params.y, params.width, params.height);
+    context.fillStyle = params.color;
     context.fill();
     context.closePath();
 }
 const setWall = () => {
-    for (let c = 0; c < wall.column; c++) {
-        for (let r = 0; r < wall.row; r++) {
+    for(let c = 0; c < wall.column; c++) {
+        for(let r = 0; r < wall.row; r++) {
             let b = wall.tab[c][r];
             if (b.status == 1) {
-                b.x = c * (brick.width + brick.margin) + wall.marginLeft;
-                b.y = r * (brick.height + brick.margin) + wall.marginTop;
+                b.x = c * (b.width + b.margin) + wall.marginLeft;
+                b.y = r * (b.height + b.margin) + wall.marginTop;
                 b.color = setColor(255-b.y, 0, b.y);
                 drawBricks(b);
+                // console.log(b.id);
                 brickCollision(b);
             }
         }
@@ -108,6 +157,7 @@ const keyUpHandler = (event) => {
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 // #endregion
+
 const movePaddle = () => {
     if(paddle.right && paddle.x < canvas.width - paddle.width) {
         paddle.x += paddle.step;
@@ -127,9 +177,9 @@ const drawPaddle = () => {
 const gameoverOrNot = () => {
     // PADDLE
     if(ball.y + ball.radius > paddle.y
-        && ball.y + ball.radius < paddle.y + paddle.height
-        && ball.x > paddle.x - ball.radius
-        && ball.x < paddle.x + paddle.width + ball.radius
+        && ball.y < paddle.y + paddle.height
+        && ball.x + ball.radius > paddle.x
+        && ball.x - ball.radius < paddle.x + paddle.width
         ) {
         ball.dy = ball.dy %2 == 0 ? -random(3) : -random(4);
         // console.log("dy => paddle :", ball.dy);
